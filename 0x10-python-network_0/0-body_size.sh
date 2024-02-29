@@ -1,3 +1,3 @@
 #!/bin/bash
-# cURL request that displays size of the response's body
-curl -so /dev/null "$1" -w '%{size_download}\n'
+URL=$1
+curl -sI $URL | grep -i Content-Length | awk '{print $2}'
