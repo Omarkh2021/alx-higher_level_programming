@@ -1,16 +1,10 @@
 #!/usr/bin/python3
-"""Takes my Github creds (username & password)
-and uses the Github API to display my ID
+"""fetches https://intranet.hbtn.io/status using the urllib package
 """
-
-import sys
-import requests
-from requests.auth import HTTPBasicAuth
-
-if __name__ == "__main__":
-    username = sys.argv[1]
-    password = sys.argv[2]
-
-    token = HTTPBasicAuth(username, password)
-    request = requests.get('https://api.github.com/user', auth=token)
-    print(request.json().get('id'))
+import urllib.request
+with urllib.request.urlopen('https://intranet.hbtn.io/status') as response:
+    data = response.read()
+    print("Body response:")
+    print("	- type:", type(data))
+    print("	- content:", data)
+    print("	- utf8 content:", data.decode('utf-8'))
